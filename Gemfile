@@ -6,7 +6,7 @@ ruby "3.2.2"
 gem "rails", "~> 7.1.0"
 
 #se não funcionar, usar o seguinte comando: git config --global url."https://github".insteadOf git://github
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', :git => 'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 gem 'jquery-rails'
 
