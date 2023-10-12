@@ -9,4 +9,6 @@ class User < ApplicationRecord
 
     validates :phone,
     format: { with: PHONE_PATTERN, message: "inválido"}
+
+    scope :search, ->(typeSearch,query){ where("#{typeSearch} like ?", "%#{query}%")}
 end
