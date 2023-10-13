@@ -8,6 +8,9 @@ class UsersController < ApplicationController
     else
       @users = User.all
     end
+    @users.each do |us|
+      puts setPatternPhone(us.phone)
+    end
   end
 
   # GET /users/1 or /users/1.json
@@ -26,6 +29,8 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @user.phone = setPatternPhone(@user.phone)
+    @user.cpf = setPatternCpf(@user.cpf)
 
     respond_to do |format|
       if @user.save
@@ -41,7 +46,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      aux_params = user_params
+      aux_params[:phone] = setPatternPhone(user_params[:phone])
+      aux_params[:cpf] = setPatternCpf(user_params[:cpf])
+
+      if @user.update(aux_params)
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -65,6 +74,55 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+    
+    def setPatternCpf(cpf)
+      newCpf = ""
+      cpf.split('').each do |ch|
+        if (ch =~ /\d/)
+          newCpf += ch
+        end
+      end
+      newCpf
+    end
+
+    def setPatternPhone(phone)
+      newPhone = ""
+      phone.split('').each do |ch|
+        if(ch =~ /\d/)
+          newPhone += ch
+        end
+      end
+
+      if(newPhone.length == 10)
+        aux = ""
+        newPhone.split('').each_with_index do |ch,i|
+          aux += ch
+          if i == 1
+            aux += '9'
+          end
+        end
+        newPhone = aux
+      end
+
+      if(newPhone.length == 12)
+
+        aux = ""
+        newPhone.split('').each_with_index do |ch,i|
+          aux += ch
+          if i == 3
+            aux += '9'
+          end
+        end
+        newPhone = aux
+      end
+
+      if(newPhone.length == 11)
+        newPhone = "55" + newPhone
+      end
+      newPhone = "+" + newPhone
+      
+      newPhone
     end
 
     # Only allow a list of trusted parameters through.

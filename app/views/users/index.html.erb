@@ -5,7 +5,11 @@
 
 <%= form_with url: users_path, method: :get do |form| %>
   <%= form.label :query, "Search for:" %>
-  <%= form.select :typeSearch, ["name", "email", "phone", "cpf"]%>
+  <%if params[:typeSearch]%>
+    <%= form.select :typeSearch, ["name", "email", "phone", "cpf"], selected: params[:typeSearch]%>
+  <%else%>
+    <%= form.select :typeSearch, ["name", "email", "phone", "cpf"]%>
+  <%end%>
   <%= form.text_field :query %>
   <%= form.submit "Search" %>
 <% end %>
@@ -27,8 +31,8 @@
         <td><%= link_to user.id, user_path(user) %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.phone %></td>
-        <td><%= user.cpf %></td>
+        <td><%= user.showPhone %></td>
+        <td><%= user.showCpf %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       user_path(user), :class => 'btn btn-default btn-xs' %>
