@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Modelo de cadastro de usuários DemoFestalab
 
-Things you may want to cover:
+* Versão do Ruby
+    ruby-3.2.2
 
-* Ruby version
+* Dependências
+    bundle install
 
-* System dependencies
+* Configurações
+    rails db:create db:migrate
 
-* Configuration
+* Rodando a aplicação
+    rails s
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* Instruções
+    Ao abrir a aplicação, você será direcionado para a página de usuários
+    Nela são exibidos os usuários cadastrados, e é possível realizar buscas por um usuário
+    Cada usuário pode ser exibido, deletado e editado
+    Existe um botão para cadastro de novos usuários
+    Ao cadastrar/editar um usuário de maneira válida, ele serão exibidas as mudanças e ele estará disponível na página inicial
 
 * ...
