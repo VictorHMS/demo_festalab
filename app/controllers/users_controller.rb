@@ -8,9 +8,7 @@ class UsersController < ApplicationController
     else
       @users = User.all
     end
-    @users.each do |us|
-      puts setPatternPhone(us.phone)
-    end
+    
   end
 
   # GET /users/1 or /users/1.json
